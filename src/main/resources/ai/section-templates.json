@@ -1,0 +1,4457 @@
+{
+  "_source": "Sections conçues pour views-builder. Syntaxe : {{slot}} insère un contenu, \"if\" retire le bloc si le contenu est absent, \"repeat\" répète le premier enfant pour chaque élément d'une liste ({{value}} pour une liste de textes, {{_index}} pour le numéro). {{_bg}} et {{_card}} dépendent du ton choisi (default ou alt).",
+  "icons": [
+    "leaf",
+    "coffee",
+    "utensils",
+    "cake-slice",
+    "croissant",
+    "wine",
+    "salad",
+    "chef-hat",
+    "flower-2",
+    "sprout",
+    "sun",
+    "moon",
+    "flame",
+    "droplets",
+    "waves",
+    "wind",
+    "mountain",
+    "heart",
+    "hand-heart",
+    "heart-handshake",
+    "smile",
+    "star",
+    "sparkles",
+    "award",
+    "shield-check",
+    "check",
+    "lock",
+    "key",
+    "scale",
+    "gavel",
+    "landmark",
+    "briefcase",
+    "file-text",
+    "handshake",
+    "users",
+    "baby",
+    "paw-print",
+    "stethoscope",
+    "dumbbell",
+    "activity",
+    "timer",
+    "clock",
+    "calendar",
+    "map-pin",
+    "phone",
+    "mail",
+    "globe",
+    "wifi",
+    "house",
+    "car",
+    "bike",
+    "truck",
+    "gift",
+    "shopping-bag",
+    "scissors",
+    "camera",
+    "music",
+    "palette",
+    "wrench",
+    "hammer",
+    "book-open",
+    "graduation-cap",
+    "zap",
+    "quote"
+  ],
+  "templates": [
+    {
+      "id": "nav",
+      "label": "Navigation",
+      "description": "Barre de navigation : nom de la marque, 2 à 4 liens et un bouton. Toujours en premier sur une page complète.",
+      "slots": {
+        "brand": "nom de la marque",
+        "links": [
+          "libellé de lien (2 à 4)"
+        ],
+        "cta?": "bouton d'action court"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "20px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "border-bottom": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Contenu de la barre",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-wrap": "wrap",
+              "align-items": "center",
+              "justify-content": "space-between",
+              "gap": "16px 32px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "span",
+                "name": "Marque",
+                "content": "{{brand}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "calc(var(--font-size-base) * 1.3)",
+                  "font-weight": "700",
+                  "letter-spacing": "-0.01em"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Liens",
+                "styles": {
+                  "display": "flex",
+                  "flex-wrap": "wrap",
+                  "align-items": "center",
+                  "gap": "12px 28px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Liste des liens",
+                    "styles": {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "align-items": "center",
+                      "gap": "12px 28px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien",
+                        "content": "{{value}}",
+                        "styles": {
+                          "color": "var(--text-muted)",
+                          "font-weight": "500",
+                          "white-space": "nowrap"
+                        },
+                        "config": {
+                          "href": ""
+                        }
+                      }
+                    ],
+                    "repeat": "links"
+                  },
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton principal",
+                    "content": "{{cta}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "10px 20px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "flex-start"
+                    },
+                    "if": "cta"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": false
+    },
+    {
+      "id": "hero-split",
+      "label": "Bandeau d'accueil",
+      "description": "Bandeau d'accueil : grand titre et texte à gauche, grande photo à droite. Le plus polyvalent.",
+      "slots": {
+        "title": "titre principal, 4 à 9 mots, concret",
+        "text": "1 à 2 phrases",
+        "cta": "bouton principal",
+        "secondaryCta?": "lien secondaire",
+        "note?": "précision courte sous les boutons (horaires, garantie...)",
+        "imageQuery": "mots-clés anglais de la photo",
+        "imageAlt": "description de la photo"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "88px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 48px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "24px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h1",
+                    "name": "Titre principal",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "calc(var(--font-size-xl) * 1.35)",
+                      "font-weight": "700",
+                      "line-height": "1.06",
+                      "letter-spacing": "-0.025em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Actions",
+                    "styles": {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "align-items": "center",
+                      "gap": "12px 24px",
+                      "padding-top": "8px"
+                    },
+                    "children": [
+                      {
+                        "type": "action",
+                        "element": "button",
+                        "name": "Bouton principal",
+                        "content": "{{cta}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "padding": "14px 26px",
+                          "border": "none",
+                          "border-radius": "var(--radius-main)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "font-weight": "600",
+                          "white-space": "nowrap",
+                          "display": "inline-block",
+                          "align-self": "flex-start"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien secondaire",
+                        "content": "{{secondaryCta}}",
+                        "styles": {
+                          "color": "var(--text)",
+                          "font-weight": "600",
+                          "text-decoration": "underline",
+                          "text-underline-offset": "6px",
+                          "white-space": "nowrap",
+                          "padding": "14px 4px"
+                        },
+                        "config": {
+                          "href": ""
+                        },
+                        "if": "secondaryCta"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Précision",
+                    "content": "{{note}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 0.875)",
+                      "line-height": "1.5",
+                      "color": "var(--text-muted)"
+                    },
+                    "if": "note"
+                  }
+                ]
+              },
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo principale",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "4 / 5",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "hero-wide",
+      "label": "Bandeau d'accueil",
+      "description": "Bandeau d'accueil éditorial : titre très grand aligné à gauche, puis une photo panoramique pleine largeur.",
+      "slots": {
+        "title": "titre principal, 4 à 9 mots",
+        "text": "1 à 2 phrases",
+        "cta": "bouton principal",
+        "secondaryCta?": "lien secondaire",
+        "imageQuery": "mots-clés anglais",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "88px 6% 96px",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "48px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Titre et texte",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+                  "gap": "24px 56px",
+                  "align-items": "end"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h1",
+                    "name": "Titre principal",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "calc(var(--font-size-xl) * 1.6)",
+                      "font-weight": "700",
+                      "line-height": "1.06",
+                      "letter-spacing": "-0.025em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Accroche",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "20px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Introduction",
+                        "content": "{{text}}",
+                        "styles": {
+                          "font-size": "calc(var(--font-size-base) * 1.2)",
+                          "line-height": "1.6",
+                          "color": "var(--text-muted)",
+                          "max-width": "58ch"
+                        }
+                      },
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Actions",
+                        "styles": {
+                          "display": "flex",
+                          "flex-wrap": "wrap",
+                          "align-items": "center",
+                          "gap": "12px 24px",
+                          "padding-top": "8px"
+                        },
+                        "children": [
+                          {
+                            "type": "action",
+                            "element": "button",
+                            "name": "Bouton principal",
+                            "content": "{{cta}}",
+                            "styles": {
+                              "background-color": "var(--primary)",
+                              "color": "var(--on-primary)",
+                              "padding": "14px 26px",
+                              "border": "none",
+                              "border-radius": "var(--radius-main)",
+                              "font-family": "var(--font-family)",
+                              "font-size": "var(--font-size-base)",
+                              "font-weight": "600",
+                              "white-space": "nowrap",
+                              "display": "inline-block",
+                              "align-self": "flex-start"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "a",
+                            "name": "Lien secondaire",
+                            "content": "{{secondaryCta}}",
+                            "styles": {
+                              "color": "var(--text)",
+                              "font-weight": "600",
+                              "text-decoration": "underline",
+                              "text-underline-offset": "6px",
+                              "white-space": "nowrap",
+                              "padding": "14px 4px"
+                            },
+                            "config": {
+                              "href": ""
+                            },
+                            "if": "secondaryCta"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo panoramique",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "16 / 7",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "hero-cover",
+      "label": "Bandeau photo",
+      "description": "Bandeau plein écran sur une grande photo d'ambiance assombrie, titre très grand en bas à gauche. Pour un lieu, une ambiance, un savoir-faire à montrer d'emblée.",
+      "slots": {
+        "title": "titre principal, 3 à 7 mots",
+        "text": "1 phrase",
+        "cta": "bouton principal",
+        "secondaryCta?": "lien secondaire",
+        "details?": [
+          "repère pratique très court (2 à 3), ex : Ouvert du mardi au dimanche"
+        ],
+        "imageQuery": "mots-clés anglais d'une photo d'ambiance large (lieu, matière, geste)"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "64px 6% 56px",
+          "background-color": "color-mix(in srgb, var(--primary) 35%, black)",
+          "color": "white",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "background-image": "linear-gradient(to top, color-mix(in srgb, black 72%, transparent), color-mix(in srgb, black 18%, transparent))",
+          "background-size": "cover",
+          "background-position": "center",
+          "container-type": "inline-size",
+          "min-height": "680px",
+          "justify-content": "flex-end"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "28px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h1",
+                "name": "Titre principal",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "clamp(calc(var(--font-size-base) * 2.4), 8.5cqi, calc(var(--font-size-base) * 6))",
+                  "font-weight": "700",
+                  "line-height": "1",
+                  "letter-spacing": "-0.03em",
+                  "text-wrap": "balance",
+                  "max-width": "14ch",
+                  "color": "white"
+                }
+              },
+              {
+                "type": "text",
+                "element": "p",
+                "name": "Introduction",
+                "content": "{{text}}",
+                "styles": {
+                  "font-size": "calc(var(--font-size-base) * 1.2)",
+                  "line-height": "1.6",
+                  "color": "color-mix(in srgb, white 82%, transparent)",
+                  "max-width": "46ch"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Actions",
+                "styles": {
+                  "display": "flex",
+                  "flex-wrap": "wrap",
+                  "align-items": "center",
+                  "gap": "12px 28px",
+                  "padding-top": "4px"
+                },
+                "children": [
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton principal",
+                    "content": "{{cta}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "14px 26px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "flex-start"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "a",
+                    "name": "Lien secondaire",
+                    "content": "{{secondaryCta}}",
+                    "styles": {
+                      "color": "white",
+                      "font-weight": "600",
+                      "text-decoration": "underline",
+                      "text-underline-offset": "6px",
+                      "white-space": "nowrap",
+                      "padding": "14px 4px",
+                      "text-decoration-color": "color-mix(in srgb, white 55%, transparent)"
+                    },
+                    "config": {
+                      "href": ""
+                    },
+                    "if": "secondaryCta"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Repères",
+                "styles": {
+                  "display": "flex",
+                  "flex-wrap": "wrap",
+                  "align-items": "center",
+                  "gap": "8px 40px",
+                  "border-top": "1px solid color-mix(in srgb, white 30%, transparent)",
+                  "padding-top": "20px",
+                  "margin-top": "24px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Repère",
+                    "content": "{{value}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 0.875)",
+                      "line-height": "1.5",
+                      "color": "color-mix(in srgb, white 82%, transparent)"
+                    }
+                  }
+                ],
+                "repeat": "details",
+                "if": "details"
+              }
+            ]
+          }
+        ],
+        "config": {
+          "backgroundQuery": "{{imageQuery}}"
+        }
+      },
+      "tone": false,
+      "families": [
+        "chaleureux",
+        "editorial"
+      ]
+    },
+    {
+      "id": "hero-statement",
+      "label": "Bandeau manifeste",
+      "description": "Bandeau manifeste : un titre géant sur toute la largeur, puis texte et boutons sous un filet, puis une grande photo panoramique. Pour une marque sûre d'elle, un message net.",
+      "slots": {
+        "title": "titre principal, 3 à 8 mots, affirmé",
+        "text": "1 à 2 phrases",
+        "cta": "bouton principal",
+        "secondaryCta?": "lien secondaire",
+        "imageQuery": "mots-clés anglais d'une photo panoramique (lieu, équipe, produit)",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "120px 6% 96px",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "56px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h1",
+                "name": "Titre principal",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "clamp(calc(var(--font-size-base) * 2.6), 10cqi, calc(var(--font-size-base) * 6))",
+                  "font-weight": "700",
+                  "line-height": "0.98",
+                  "letter-spacing": "-0.04em",
+                  "text-wrap": "balance",
+                  "max-width": "16ch"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Accroche",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+                  "gap": "24px 64px",
+                  "align-items": "start",
+                  "border-top": "1px solid var(--text)",
+                  "padding-top": "28px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text)",
+                      "max-width": "44ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Actions",
+                    "styles": {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "align-items": "center",
+                      "gap": "12px 28px",
+                      "justify-content": "flex-end"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien secondaire",
+                        "content": "{{secondaryCta}}",
+                        "styles": {
+                          "color": "var(--text)",
+                          "font-weight": "600",
+                          "text-decoration": "underline",
+                          "text-underline-offset": "6px",
+                          "white-space": "nowrap",
+                          "padding": "14px 4px"
+                        },
+                        "config": {
+                          "href": ""
+                        },
+                        "if": "secondaryCta"
+                      },
+                      {
+                        "type": "action",
+                        "element": "button",
+                        "name": "Bouton principal",
+                        "content": "{{cta}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "padding": "14px 26px",
+                          "border": "none",
+                          "border-radius": "var(--radius-main)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "font-weight": "600",
+                          "white-space": "nowrap",
+                          "display": "inline-block",
+                          "align-self": "center"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo panoramique",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "21 / 9",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                },
+                "if": "imageQuery"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "audacieux"
+      ]
+    },
+    {
+      "id": "hero-mosaic",
+      "label": "Bandeau mosaïque",
+      "description": "Bandeau mosaïque : titre à gauche, à droite deux à trois photos qui se chevauchent autour d'un bloc de couleur portant une icône. Pour une marque vivante, créative, joyeuse.",
+      "slots": {
+        "title": "titre principal, 3 à 7 mots",
+        "text": "1 à 2 phrases",
+        "cta": "bouton principal",
+        "secondaryCta?": "lien secondaire",
+        "icon": "nom d'icône (liste plus bas)",
+        "images": [
+          {
+            "imageQuery": "mots-clés anglais",
+            "alt": "description"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "88px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              "gap": "48px 56px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1200px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "24px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h1",
+                    "name": "Titre principal",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "clamp(calc(var(--font-size-base) * 2.4), 6.5cqi, calc(var(--font-size-base) * 5))",
+                      "font-weight": "700",
+                      "line-height": "1",
+                      "letter-spacing": "-0.035em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Actions",
+                    "styles": {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "align-items": "center",
+                      "gap": "12px 24px",
+                      "padding-top": "8px"
+                    },
+                    "children": [
+                      {
+                        "type": "action",
+                        "element": "button",
+                        "name": "Bouton principal",
+                        "content": "{{cta}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "padding": "14px 26px",
+                          "border": "none",
+                          "border-radius": "var(--radius-main)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "font-weight": "600",
+                          "white-space": "nowrap",
+                          "display": "inline-block",
+                          "align-self": "flex-start"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien secondaire",
+                        "content": "{{secondaryCta}}",
+                        "styles": {
+                          "color": "var(--text)",
+                          "font-weight": "600",
+                          "text-decoration": "underline",
+                          "text-underline-offset": "6px",
+                          "white-space": "nowrap",
+                          "padding": "14px 4px"
+                        },
+                        "config": {
+                          "href": ""
+                        },
+                        "if": "secondaryCta"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Mosaïque",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(12, 1fr)",
+                  "grid-template-rows": "repeat(8, clamp(36px, 5.6cqi, 64px))",
+                  "width": "100%"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Bloc de couleur",
+                    "styles": {
+                      "grid-column": "8 / 13",
+                      "grid-row": "1 / 4",
+                      "background-color": "var(--primary)",
+                      "border-radius": "var(--radius-main)",
+                      "display": "flex",
+                      "align-items": "center",
+                      "justify-content": "center"
+                    },
+                    "children": [
+                      {
+                        "type": "media",
+                        "element": "icon",
+                        "name": "Icône",
+                        "config": {
+                          "icon": "{{icon}}"
+                        },
+                        "styles": {
+                          "width": "44px",
+                          "height": "44px",
+                          "flex-shrink": "0",
+                          "color": "var(--on-primary)"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo principale",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "1 / 9",
+                      "grid-row": "2 / 8",
+                      "z-index": "1",
+                      "box-shadow": "0 28px 56px -24px color-mix(in srgb, black 45%, transparent)"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.0.imageQuery}}",
+                      "alt": "{{images.0.alt}}"
+                    }
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo secondaire",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "7 / 12",
+                      "grid-row": "5 / 9",
+                      "z-index": "2",
+                      "border": "8px solid {{_bg}}"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.1.imageQuery}}",
+                      "alt": "{{images.1.alt}}"
+                    },
+                    "if": "images.1"
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Petite photo",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "10 / 13",
+                      "grid-row": "3 / 6",
+                      "z-index": "3",
+                      "border": "6px solid {{_bg}}"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.2.imageQuery}}",
+                      "alt": "{{images.2.alt}}"
+                    },
+                    "if": "images.2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "expressif"
+      ]
+    },
+    {
+      "id": "hero-poster",
+      "label": "Affiche",
+      "description": "Bandeau affiche sans photo, sur la couleur principale du thème : pour un message fort ou une offre.",
+      "slots": {
+        "title": "titre très court et percutant",
+        "text": "1 phrase",
+        "cta": "bouton principal"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "120px 6%",
+          "background-color": "var(--primary)",
+          "color": "var(--on-primary)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Affiche",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "28px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h1",
+                "name": "Titre principal",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "calc(var(--font-size-xl) * 1.7)",
+                  "font-weight": "700",
+                  "line-height": "1.06",
+                  "letter-spacing": "-0.025em",
+                  "text-wrap": "balance",
+                  "color": "var(--on-primary)",
+                  "max-width": "16ch"
+                }
+              },
+              {
+                "type": "text",
+                "element": "p",
+                "name": "Introduction",
+                "content": "{{text}}",
+                "styles": {
+                  "font-size": "calc(var(--font-size-base) * 1.2)",
+                  "line-height": "1.6",
+                  "color": "var(--on-primary)",
+                  "max-width": "58ch"
+                }
+              },
+              {
+                "type": "action",
+                "element": "button",
+                "name": "Bouton principal",
+                "content": "{{cta}}",
+                "styles": {
+                  "background-color": "var(--on-primary)",
+                  "color": "var(--primary)",
+                  "padding": "14px 26px",
+                  "border": "none",
+                  "border-radius": "var(--radius-main)",
+                  "font-family": "var(--font-family)",
+                  "font-size": "var(--font-size-base)",
+                  "font-weight": "600",
+                  "white-space": "nowrap",
+                  "display": "inline-block",
+                  "align-self": "flex-start"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": false,
+      "families": [
+        "expressif"
+      ]
+    },
+    {
+      "id": "features",
+      "label": "Points forts",
+      "description": "Points forts sans cartes : titre à gauche, liste de 3 à 5 arguments séparés par des filets à droite.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "items": [
+          {
+            "title": "argument court",
+            "text": "1 à 2 phrases"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 72px",
+              "align-items": "start",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Liste des arguments",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Argument",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "8px",
+                      "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                      "padding": "24px 0"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "h3",
+                        "name": "Argument",
+                        "content": "{{title}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "calc(var(--font-size-base) * 1.25)",
+                          "font-weight": "700",
+                          "line-height": "1.3"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Texte",
+                        "content": "{{text}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "items"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "editorial"
+      ]
+    },
+    {
+      "id": "features-icons",
+      "label": "Points forts illustrés",
+      "description": "Points forts illustrés : une photo d'ambiance à gauche, à droite le titre et 3 à 4 arguments, chacun avec une icône fine. Rassurant et chaleureux.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "items": [
+          {
+            "icon": "nom d'icône (liste plus bas)",
+            "title": "argument court",
+            "text": "1 à 2 phrases"
+          }
+        ],
+        "imageQuery": "mots-clés anglais",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              "gap": "48px 80px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo d'ambiance",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "4 / 5",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "32px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "En-tête",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "16px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "h2",
+                        "name": "Titre",
+                        "content": "{{title}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "var(--font-size-xl)",
+                          "font-weight": "700",
+                          "line-height": "1.12",
+                          "letter-spacing": "-0.02em",
+                          "text-wrap": "balance"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Introduction",
+                        "content": "{{intro}}",
+                        "styles": {
+                          "font-size": "calc(var(--font-size-base) * 1.2)",
+                          "line-height": "1.6",
+                          "color": "var(--text-muted)",
+                          "max-width": "58ch"
+                        },
+                        "if": "intro"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Liste des arguments",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "28px"
+                    },
+                    "children": [
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Argument",
+                        "styles": {
+                          "display": "grid",
+                          "grid-template-columns": "56px 1fr",
+                          "gap": "4px 20px",
+                          "align-items": "start"
+                        },
+                        "children": [
+                          {
+                            "type": "container",
+                            "element": "div",
+                            "name": "Pastille",
+                            "styles": {
+                              "grid-row": "1 / 3",
+                              "width": "56px",
+                              "height": "56px",
+                              "border-radius": "999px",
+                              "background-color": "color-mix(in srgb, var(--primary) 12%, {{_bg}})",
+                              "display": "flex",
+                              "align-items": "center",
+                              "justify-content": "center"
+                            },
+                            "children": [
+                              {
+                                "type": "media",
+                                "element": "icon",
+                                "name": "Icône",
+                                "config": {
+                                  "icon": "{{icon}}"
+                                },
+                                "styles": {
+                                  "width": "28px",
+                                  "height": "28px",
+                                  "flex-shrink": "0",
+                                  "color": "var(--primary)"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "text",
+                            "element": "h3",
+                            "name": "Argument",
+                            "content": "{{title}}",
+                            "styles": {
+                              "font-family": "var(--font-family-heading)",
+                              "font-size": "calc(var(--font-size-base) * 1.25)",
+                              "font-weight": "700",
+                              "line-height": "1.3",
+                              "padding-top": "4px"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "p",
+                            "name": "Texte",
+                            "content": "{{text}}",
+                            "styles": {
+                              "font-size": "var(--font-size-base)",
+                              "line-height": "1.65",
+                              "color": "var(--text-muted)",
+                              "max-width": "65ch"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "repeat": "items"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "chaleureux"
+      ]
+    },
+    {
+      "id": "features-statement",
+      "label": "Points forts manifeste",
+      "description": "Points forts manifeste : chaque argument sur une ligne pleine largeur, titre très grand à gauche, explication à droite, séparés par des filets nets. Sobre et affirmé.",
+      "slots": {
+        "title": "titre de section",
+        "items": [
+          {
+            "title": "argument en 2 à 4 mots",
+            "text": "1 à 2 phrases"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "40px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h2",
+                "name": "Titre",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "var(--font-size-xl)",
+                  "font-weight": "700",
+                  "line-height": "1.12",
+                  "letter-spacing": "-0.02em",
+                  "text-wrap": "balance",
+                  "max-width": "20ch"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Liste des arguments",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Argument",
+                    "styles": {
+                      "display": "grid",
+                      "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+                      "gap": "12px 64px",
+                      "align-items": "baseline",
+                      "border-top": "1px solid var(--text)",
+                      "padding": "32px 0 40px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "h3",
+                        "name": "Argument",
+                        "content": "{{title}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "clamp(calc(var(--font-size-base) * 1.8), 5cqi, calc(var(--font-size-base) * 3.4))",
+                          "font-weight": "700",
+                          "line-height": "1.05",
+                          "letter-spacing": "-0.03em",
+                          "text-wrap": "balance"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Texte",
+                        "content": "{{text}}",
+                        "styles": {
+                          "font-size": "calc(var(--font-size-base) * 1.1)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "48ch"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "items"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "audacieux"
+      ]
+    },
+    {
+      "id": "features-bento",
+      "label": "Points forts en blocs",
+      "description": "Points forts en blocs : un grand bloc photo avec l'argument principal, à côté une phrase forte sur la couleur du thème et 2 à 3 blocs plus petits avec icône. Vivant, coloré.",
+      "slots": {
+        "title": "titre de section",
+        "highlight": {
+          "title": "argument principal, 3 à 6 mots",
+          "text": "1 phrase",
+          "imageQuery": "mots-clés anglais"
+        },
+        "punchline?": "phrase forte très courte (un chiffre, une promesse)",
+        "items": [
+          {
+            "icon": "nom d'icône (liste plus bas)",
+            "title": "argument court",
+            "text": "1 phrase"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "40px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h2",
+                "name": "Titre",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "var(--font-size-xl)",
+                  "font-weight": "700",
+                  "line-height": "1.12",
+                  "letter-spacing": "-0.02em",
+                  "text-wrap": "balance",
+                  "max-width": "22ch"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Blocs",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+                  "gap": "16px",
+                  "align-items": "stretch"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Bloc photo",
+                    "styles": {
+                      "width": "100%",
+                      "padding": "32px",
+                      "background-color": "color-mix(in srgb, var(--primary) 35%, black)",
+                      "color": "white",
+                      "font-family": "var(--font-family)",
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "align-items": "stretch",
+                      "background-image": "linear-gradient(to top, color-mix(in srgb, black 78%, transparent), color-mix(in srgb, black 0%, transparent))",
+                      "background-size": "cover",
+                      "background-position": "center",
+                      "container-type": "inline-size",
+                      "min-height": "460px",
+                      "justify-content": "flex-end",
+                      "border-radius": "var(--radius-main)"
+                    },
+                    "children": [
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Texte du bloc",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "10px"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "element": "h3",
+                            "name": "Argument principal",
+                            "content": "{{highlight.title}}",
+                            "styles": {
+                              "font-family": "var(--font-family-heading)",
+                              "font-size": "clamp(calc(var(--font-size-base) * 1.6), 3.6cqi, calc(var(--font-size-base) * 2.6))",
+                              "font-weight": "700",
+                              "line-height": "1.1",
+                              "color": "white",
+                              "letter-spacing": "-0.02em"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "p",
+                            "name": "Texte",
+                            "content": "{{highlight.text}}",
+                            "styles": {
+                              "font-size": "var(--font-size-base)",
+                              "line-height": "1.65",
+                              "color": "color-mix(in srgb, white 82%, transparent)",
+                              "max-width": "65ch"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "config": {
+                      "backgroundQuery": "{{highlight.imageQuery}}"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Colonne de blocs",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "16px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Phrase forte",
+                        "content": "{{punchline}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "border-radius": "var(--radius-main)",
+                          "padding": "32px",
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "clamp(calc(var(--font-size-base) * 1.5), 3.2cqi, calc(var(--font-size-base) * 2.2))",
+                          "font-weight": "700",
+                          "line-height": "1.1",
+                          "letter-spacing": "-0.02em",
+                          "text-wrap": "balance"
+                        },
+                        "if": "punchline"
+                      },
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Petits blocs",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "16px"
+                        },
+                        "children": [
+                          {
+                            "type": "container",
+                            "element": "div",
+                            "name": "Bloc",
+                            "styles": {
+                              "display": "grid",
+                              "grid-template-columns": "auto 1fr",
+                              "gap": "6px 16px",
+                              "background-color": "{{_card}}",
+                              "border-radius": "var(--radius-main)",
+                              "padding": "24px"
+                            },
+                            "children": [
+                              {
+                                "type": "media",
+                                "element": "icon",
+                                "name": "Icône",
+                                "config": {
+                                  "icon": "{{icon}}"
+                                },
+                                "styles": {
+                                  "width": "26px",
+                                  "height": "26px",
+                                  "flex-shrink": "0",
+                                  "color": "var(--primary)",
+                                  "grid-row": "1 / 3"
+                                }
+                              },
+                              {
+                                "type": "text",
+                                "element": "h3",
+                                "name": "Argument",
+                                "content": "{{title}}",
+                                "styles": {
+                                  "font-family": "var(--font-family-heading)",
+                                  "font-size": "calc(var(--font-size-base) * 1.25)",
+                                  "font-weight": "700",
+                                  "line-height": "1.3"
+                                }
+                              },
+                              {
+                                "type": "text",
+                                "element": "p",
+                                "name": "Texte",
+                                "content": "{{text}}",
+                                "styles": {
+                                  "font-size": "var(--font-size-base)",
+                                  "line-height": "1.65",
+                                  "color": "var(--text-muted)",
+                                  "max-width": "65ch"
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "repeat": "items"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "expressif"
+      ]
+    },
+    {
+      "id": "steps",
+      "label": "Étapes",
+      "description": "Étapes numérotées (3 à 4) : quand l'ordre compte (réservation, déroulé d'un cours, commande).",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "items": [
+          {
+            "title": "étape",
+            "text": "1 phrase"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "48px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Étapes",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
+                  "gap": "32px",
+                  "align-items": "start"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Étape",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "12px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Numéro",
+                        "content": "{{_index}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "var(--font-size-xl)",
+                          "font-weight": "700",
+                          "color": "var(--primary)",
+                          "line-height": "1"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "h3",
+                        "name": "Étape",
+                        "content": "{{title}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "calc(var(--font-size-base) * 1.25)",
+                          "font-weight": "700",
+                          "line-height": "1.3"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Texte",
+                        "content": "{{text}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "items"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "text-image",
+      "label": "Texte et photo",
+      "description": "Texte à gauche, photo à droite : présenter le lieu, l'histoire, une offre.",
+      "slots": {
+        "title": "titre de section",
+        "text": "2 à 3 phrases",
+        "points?": [
+          "point clé court (2 à 4)"
+        ],
+        "cta?": "bouton",
+        "imageQuery": "mots-clés anglais",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 56px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "20px",
+                  "align-self": "center"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Texte",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.1)",
+                      "line-height": "1.65",
+                      "color": "var(--text-muted)",
+                      "max-width": "65ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Points clés",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "0px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Point clé",
+                        "content": "{{value}}",
+                        "styles": {
+                          "font-weight": "600",
+                          "padding": "14px 0",
+                          "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+                        }
+                      }
+                    ],
+                    "repeat": "points"
+                  },
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton principal",
+                    "content": "{{cta}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "14px 26px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "flex-start"
+                    },
+                    "if": "cta"
+                  }
+                ]
+              },
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "4 / 3",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "image-text",
+      "label": "Photo et texte",
+      "description": "Photo à gauche, texte à droite : même usage que text-image, pour alterner.",
+      "slots": {
+        "title": "titre de section",
+        "text": "2 à 3 phrases",
+        "points?": [
+          "point clé court (2 à 4)"
+        ],
+        "cta?": "bouton",
+        "imageQuery": "mots-clés anglais",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 56px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "4 / 3",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "20px",
+                  "align-self": "center"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Texte",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.1)",
+                      "line-height": "1.65",
+                      "color": "var(--text-muted)",
+                      "max-width": "65ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Points clés",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "0px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Point clé",
+                        "content": "{{value}}",
+                        "styles": {
+                          "font-weight": "600",
+                          "padding": "14px 0",
+                          "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+                        }
+                      }
+                    ],
+                    "repeat": "points"
+                  },
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton principal",
+                    "content": "{{cta}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "14px 26px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "flex-start"
+                    },
+                    "if": "cta"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "gallery",
+      "label": "Galerie",
+      "description": "Galerie de 3 à 6 photos avec un titre : ambiance, réalisations, produits.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "images": [
+          {
+            "imageQuery": "mots-clés anglais",
+            "alt": "description"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "40px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Photos",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+                  "gap": "16px",
+                  "align-items": "start"
+                },
+                "children": [
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo de galerie",
+                    "styles": {
+                      "width": "100%",
+                      "aspect-ratio": "1 / 1",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}"
+                    },
+                    "config": {
+                      "imageQuery": "{{imageQuery}}",
+                      "alt": "{{alt}}"
+                    }
+                  }
+                ],
+                "repeat": "images"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "gallery-editorial",
+      "label": "Galerie magazine",
+      "description": "Galerie magazine : une grande photo légendée à gauche, à droite le titre, un court texte et deux photos décalées. Posé, éditorial.",
+      "slots": {
+        "title": "titre de section",
+        "text": "2 phrases",
+        "images": [
+          {
+            "imageQuery": "mots-clés anglais",
+            "alt": "description",
+            "caption?": "légende courte"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              "gap": "48px 72px",
+              "align-items": "start",
+              "width": "100%",
+              "max-width": "1160px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Grande photo",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "12px"
+                },
+                "children": [
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo",
+                    "styles": {
+                      "width": "100%",
+                      "aspect-ratio": "4 / 5",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.0.imageQuery}}",
+                      "alt": "{{images.0.alt}}"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Légende",
+                    "content": "{{images.0.caption}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 0.875)",
+                      "line-height": "1.5",
+                      "color": "var(--text-muted)",
+                      "font-style": "italic"
+                    },
+                    "if": "images.0.caption"
+                  }
+                ],
+                "if": "images.0"
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Colonne",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "32px",
+                  "padding-top": "32px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Texte",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.1)",
+                      "line-height": "1.65",
+                      "color": "var(--text-muted)",
+                      "max-width": "65ch"
+                    }
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Petites photos",
+                    "styles": {
+                      "display": "grid",
+                      "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 140px), 1fr))",
+                      "gap": "20px",
+                      "align-items": "start"
+                    },
+                    "children": [
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Photo",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "12px"
+                        },
+                        "children": [
+                          {
+                            "type": "media",
+                            "element": "img",
+                            "name": "Photo",
+                            "styles": {
+                              "width": "100%",
+                              "aspect-ratio": "1 / 1",
+                              "border-radius": "var(--radius-main)",
+                              "overflow": "hidden",
+                              "padding": "0",
+                              "background-color": "{{_card}}"
+                            },
+                            "config": {
+                              "imageQuery": "{{images.1.imageQuery}}",
+                              "alt": "{{images.1.alt}}"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Légende",
+                            "content": "{{images.1.caption}}",
+                            "styles": {
+                              "font-size": "calc(var(--font-size-base) * 0.875)",
+                              "line-height": "1.5",
+                              "color": "var(--text-muted)",
+                              "font-style": "italic"
+                            },
+                            "if": "images.1.caption"
+                          }
+                        ],
+                        "if": "images.1"
+                      },
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Photo décalée",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "12px",
+                          "margin-top": "56px"
+                        },
+                        "children": [
+                          {
+                            "type": "media",
+                            "element": "img",
+                            "name": "Photo",
+                            "styles": {
+                              "width": "100%",
+                              "aspect-ratio": "3 / 4",
+                              "border-radius": "var(--radius-main)",
+                              "overflow": "hidden",
+                              "padding": "0",
+                              "background-color": "{{_card}}"
+                            },
+                            "config": {
+                              "imageQuery": "{{images.2.imageQuery}}",
+                              "alt": "{{images.2.alt}}"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Légende",
+                            "content": "{{images.2.caption}}",
+                            "styles": {
+                              "font-size": "calc(var(--font-size-base) * 0.875)",
+                              "line-height": "1.5",
+                              "color": "var(--text-muted)",
+                              "font-style": "italic"
+                            },
+                            "if": "images.2.caption"
+                          }
+                        ],
+                        "if": "images.2"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "editorial",
+        "chaleureux"
+      ]
+    },
+    {
+      "id": "gallery-mosaic",
+      "label": "Galerie mosaïque",
+      "description": "Galerie mosaïque : 3 à 4 photos de tailles différentes qui se chevauchent, sous un titre. Pour une ambiance, des réalisations, avec du rythme.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "images": [
+          {
+            "imageQuery": "mots-clés anglais",
+            "alt": "description"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "48px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+                  "gap": "16px 64px",
+                  "align-items": "end"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Mosaïque",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(12, 1fr)",
+                  "grid-template-rows": "repeat(7, clamp(40px, 7cqi, 96px))",
+                  "width": "100%"
+                },
+                "children": [
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Grande photo",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "1 / 8",
+                      "grid-row": "1 / 6"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.0.imageQuery}}",
+                      "alt": "{{images.0.alt}}"
+                    }
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo haute",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "9 / 13",
+                      "grid-row": "1 / 4"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.1.imageQuery}}",
+                      "alt": "{{images.1.alt}}"
+                    },
+                    "if": "images.1"
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo en avant",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "6 / 10",
+                      "grid-row": "4 / 8",
+                      "z-index": "2",
+                      "border": "10px solid {{_bg}}",
+                      "box-shadow": "0 28px 56px -24px color-mix(in srgb, black 45%, transparent)"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.2.imageQuery}}",
+                      "alt": "{{images.2.alt}}"
+                    },
+                    "if": "images.2"
+                  },
+                  {
+                    "type": "media",
+                    "element": "img",
+                    "name": "Photo de côté",
+                    "styles": {
+                      "width": "100%",
+                      "border-radius": "var(--radius-main)",
+                      "overflow": "hidden",
+                      "padding": "0",
+                      "background-color": "{{_card}}",
+                      "grid-column": "10 / 13",
+                      "grid-row": "4 / 7"
+                    },
+                    "config": {
+                      "imageQuery": "{{images.3.imageQuery}}",
+                      "alt": "{{images.3.alt}}"
+                    },
+                    "if": "images.3"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "expressif",
+        "audacieux"
+      ]
+    },
+    {
+      "id": "price-list",
+      "label": "Carte des prix",
+      "description": "Carte ou liste de prix façon menu (nom, description, prix) : restaurant, salon, services à l'unité.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "items": [
+          {
+            "name": "nom",
+            "description?": "courte description",
+            "price": "prix, ex : 6,50 €"
+          }
+        ],
+        "note?": "précision sous la liste"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "760px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "32px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Liste des prix",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Ligne de prix",
+                    "styles": {
+                      "display": "grid",
+                      "grid-template-columns": "1fr auto",
+                      "gap": "4px 24px",
+                      "padding": "20px 0",
+                      "border-bottom": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                      "align-items": "baseline"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Nom",
+                        "content": "{{name}}",
+                        "styles": {
+                          "font-weight": "600",
+                          "font-size": "calc(var(--font-size-base) * 1.1)"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Prix",
+                        "content": "{{price}}",
+                        "styles": {
+                          "font-weight": "700",
+                          "color": "var(--primary)",
+                          "font-variant-numeric": "tabular-nums",
+                          "white-space": "nowrap"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Description",
+                        "content": "{{description}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch",
+                          "grid-column": "1 / -1"
+                        },
+                        "if": "description"
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "items"
+              },
+              {
+                "type": "text",
+                "element": "span",
+                "name": "Précision",
+                "content": "{{note}}",
+                "styles": {
+                  "font-size": "calc(var(--font-size-base) * 0.875)",
+                  "line-height": "1.5",
+                  "color": "var(--text-muted)"
+                },
+                "if": "note"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "pricing",
+      "label": "Formules",
+      "description": "Formules ou abonnements (2 à 3) côte à côte, avec prix et bouton.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "plans": [
+          {
+            "name": "nom de la formule",
+            "price": "prix",
+            "period?": "ex : / mois",
+            "description": "pour qui, en 1 phrase",
+            "features": [
+              "avantage court (3 à 4)"
+            ],
+            "cta": "bouton"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "48px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Formules",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 210px), 1fr))",
+                  "gap": "20px",
+                  "align-items": "stretch"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Formule",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "16px",
+                      "background-color": "{{_card}}",
+                      "padding": "28px 24px",
+                      "border-radius": "var(--radius-main)",
+                      "border": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "h3",
+                        "name": "Nom de la formule",
+                        "content": "{{name}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "calc(var(--font-size-base) * 1.25)",
+                          "font-weight": "700",
+                          "line-height": "1.3"
+                        }
+                      },
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Prix",
+                        "styles": {
+                          "display": "flex",
+                          "flex-wrap": "wrap",
+                          "align-items": "baseline",
+                          "gap": "6px"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Montant",
+                            "content": "{{price}}",
+                            "styles": {
+                              "font-family": "var(--font-family-heading)",
+                              "font-size": "var(--font-size-xl)",
+                              "font-weight": "700",
+                              "line-height": "1"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Période",
+                            "content": "{{period}}",
+                            "styles": {
+                              "font-size": "calc(var(--font-size-base) * 0.875)",
+                              "line-height": "1.5",
+                              "color": "var(--text-muted)"
+                            },
+                            "if": "period"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Texte",
+                        "content": "{{description}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch"
+                        }
+                      },
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Avantages",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "8px",
+                          "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                          "padding-top": "16px",
+                          "flex": "1"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "element": "p",
+                            "name": "Avantage",
+                            "content": "{{value}}",
+                            "styles": {
+                              "font-size": "calc(var(--font-size-base) * 0.95)",
+                              "line-height": "1.65",
+                              "color": "var(--text)",
+                              "max-width": "65ch"
+                            }
+                          }
+                        ],
+                        "repeat": "features"
+                      },
+                      {
+                        "type": "action",
+                        "element": "button",
+                        "name": "Bouton principal",
+                        "content": "{{cta}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "padding": "14px 26px",
+                          "border": "none",
+                          "border-radius": "var(--radius-main)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "font-weight": "600",
+                          "white-space": "nowrap",
+                          "display": "inline-block",
+                          "align-self": "stretch",
+                          "text-align": "center"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "plans"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "testimonial",
+      "label": "Témoignage",
+      "description": "Une grande citation de client, mise en avant. Une seule par page.",
+      "slots": {
+        "quote": "citation de 1 à 3 phrases, crédible et précise",
+        "author": "prénom et nom",
+        "role?": "contexte (cliente depuis 2021...)"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Citation",
+            "styles": {
+              "width": "100%",
+              "max-width": "860px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "28px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "blockquote",
+                "name": "Citation",
+                "content": "« {{quote}} »",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "calc(var(--font-size-xl) * 0.85)",
+                  "line-height": "1.3",
+                  "letter-spacing": "-0.01em",
+                  "text-wrap": "balance"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Auteur",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "4px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Nom",
+                    "content": "{{author}}",
+                    "styles": {
+                      "font-weight": "700"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Contexte",
+                    "content": "{{role}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 0.875)",
+                      "line-height": "1.5",
+                      "color": "var(--text-muted)"
+                    },
+                    "if": "role"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "faq",
+      "label": "Questions fréquentes",
+      "description": "Questions fréquentes (3 à 6) : titre à gauche, questions et réponses à droite.",
+      "slots": {
+        "title": "titre de section",
+        "intro?": "1 phrase",
+        "items": [
+          {
+            "question": "question",
+            "answer": "réponse en 1 à 3 phrases"
+          }
+        ]
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 72px",
+              "align-items": "start",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "En-tête",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "16px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{intro}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "intro"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Questions",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "0px"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Question",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "10px",
+                      "border-bottom": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                      "padding": "24px 0"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "h3",
+                        "name": "Question",
+                        "content": "{{question}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "calc(var(--font-size-base) * 1.25)",
+                          "font-weight": "700",
+                          "line-height": "1.3"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Réponse",
+                        "content": "{{answer}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "repeat": "items"
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "contact",
+      "label": "Infos pratiques",
+      "description": "Infos pratiques : adresse, horaires, téléphone (lignes libellé / valeur) avec une photo du lieu.",
+      "slots": {
+        "title": "titre de section",
+        "text?": "1 phrase",
+        "details": [
+          {
+            "label": "ex : Adresse, Horaires, Téléphone",
+            "value": "valeur"
+          }
+        ],
+        "cta?": "bouton",
+        "imageQuery": "mots-clés anglais",
+        "imageAlt": "description"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 56px",
+              "align-items": "center",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Informations",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "24px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    },
+                    "if": "text"
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Détails",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "0px"
+                    },
+                    "children": [
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Ligne",
+                        "styles": {
+                          "display": "grid",
+                          "grid-template-columns": "minmax(110px, 1fr) 2fr",
+                          "gap": "16px",
+                          "padding": "16px 0",
+                          "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Libellé",
+                            "content": "{{label}}",
+                            "styles": {
+                              "font-weight": "600"
+                            }
+                          },
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Valeur",
+                            "content": "{{value}}",
+                            "styles": {
+                              "color": "var(--text-muted)",
+                              "line-height": "1.5"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "repeat": "details"
+                  },
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton principal",
+                    "content": "{{cta}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "14px 26px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "flex-start"
+                    },
+                    "if": "cta"
+                  }
+                ]
+              },
+              {
+                "type": "media",
+                "element": "img",
+                "name": "Photo du lieu",
+                "styles": {
+                  "width": "100%",
+                  "aspect-ratio": "1 / 1",
+                  "border-radius": "var(--radius-main)",
+                  "overflow": "hidden",
+                  "padding": "0",
+                  "background-color": "{{_card}}"
+                },
+                "config": {
+                  "imageQuery": "{{imageQuery}}",
+                  "alt": "{{imageAlt}}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "form",
+      "label": "Formulaire",
+      "description": "Formulaire (contact, réservation, inscription) : texte d'accompagnement à gauche, formulaire à droite.",
+      "slots": {
+        "title": "titre de section",
+        "text": "1 à 2 phrases",
+        "note?": "réassurance courte (réponse sous 24 h...)",
+        "fields": [
+          {
+            "label": "libellé",
+            "placeholder": "exemple de saisie"
+          }
+        ],
+        "message?": {
+          "label": "libellé du champ long",
+          "placeholder": "exemple"
+        },
+        "checkboxes?": [
+          "case à cocher"
+        ],
+        "submit": "libellé du bouton d'envoi"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              "gap": "40px 72px",
+              "align-items": "start",
+              "width": "100%",
+              "max-width": "1120px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "20px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text-muted)",
+                      "max-width": "58ch"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "span",
+                    "name": "Précision",
+                    "content": "{{note}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 0.875)",
+                      "line-height": "1.5",
+                      "color": "var(--text-muted)"
+                    },
+                    "if": "note"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Formulaire",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "20px",
+                  "background-color": "{{_card}}",
+                  "padding": "32px",
+                  "border-radius": "var(--radius-main)",
+                  "border": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Champs",
+                    "styles": {
+                      "display": "grid",
+                      "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
+                      "gap": "20px",
+                      "align-items": "start"
+                    },
+                    "children": [
+                      {
+                        "type": "container",
+                        "element": "div",
+                        "name": "Champ",
+                        "styles": {
+                          "display": "flex",
+                          "flex-direction": "column",
+                          "gap": "8px"
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "element": "span",
+                            "name": "Libellé",
+                            "content": "{{label}}",
+                            "styles": {
+                              "font-weight": "600",
+                              "font-size": "calc(var(--font-size-base) * 0.95)"
+                            }
+                          },
+                          {
+                            "type": "input",
+                            "element": "input",
+                            "name": "Saisie",
+                            "config": {
+                              "placeholder": "{{placeholder}}"
+                            },
+                            "styles": {
+                              "padding": "12px 14px",
+                              "border": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                              "border-radius": "var(--radius-main)",
+                              "background-color": "var(--bg-page)",
+                              "font-family": "var(--font-family)",
+                              "font-size": "var(--font-size-base)",
+                              "color": "var(--text)"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "repeat": "fields"
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Message",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "8px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Libellé",
+                        "content": "{{message.label}}",
+                        "styles": {
+                          "font-weight": "600",
+                          "font-size": "calc(var(--font-size-base) * 0.95)"
+                        }
+                      },
+                      {
+                        "type": "input",
+                        "element": "textarea",
+                        "name": "Message",
+                        "config": {
+                          "placeholder": "{{message.placeholder}}"
+                        },
+                        "styles": {
+                          "padding": "12px 14px",
+                          "min-height": "120px",
+                          "border": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                          "border-radius": "var(--radius-main)",
+                          "background-color": "var(--bg-page)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "color": "var(--text)"
+                        }
+                      }
+                    ],
+                    "if": "message"
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Cases à cocher",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "10px"
+                    },
+                    "children": [
+                      {
+                        "type": "input",
+                        "element": "checkbox",
+                        "name": "Case à cocher",
+                        "config": {
+                          "label": "{{value}}"
+                        },
+                        "styles": {
+                          "font-size": "calc(var(--font-size-base) * 0.95)",
+                          "color": "var(--text)"
+                        }
+                      }
+                    ],
+                    "repeat": "checkboxes"
+                  },
+                  {
+                    "type": "action",
+                    "element": "button",
+                    "name": "Bouton d'envoi",
+                    "content": "{{submit}}",
+                    "styles": {
+                      "background-color": "var(--primary)",
+                      "color": "var(--on-primary)",
+                      "padding": "14px 26px",
+                      "border": "none",
+                      "border-radius": "var(--radius-main)",
+                      "font-family": "var(--font-family)",
+                      "font-size": "var(--font-size-base)",
+                      "font-weight": "600",
+                      "white-space": "nowrap",
+                      "display": "inline-block",
+                      "align-self": "stretch",
+                      "text-align": "center"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    },
+    {
+      "id": "cta",
+      "label": "Appel à l'action",
+      "description": "Appel à l'action final dans un grand encadré de la couleur principale.",
+      "slots": {
+        "title": "titre court",
+        "text?": "1 phrase",
+        "cta": "bouton"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "64px 6%",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Encadré",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "background-color": "var(--primary)",
+              "color": "var(--on-primary)",
+              "border-radius": "var(--radius-main)",
+              "padding": "56px 6%",
+              "display": "flex",
+              "flex-wrap": "wrap",
+              "align-items": "center",
+              "justify-content": "space-between",
+              "gap": "24px 48px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Texte",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "12px",
+                  "flex": "1 1 320px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "h2",
+                    "name": "Titre",
+                    "content": "{{title}}",
+                    "styles": {
+                      "font-family": "var(--font-family-heading)",
+                      "font-size": "var(--font-size-xl)",
+                      "font-weight": "700",
+                      "line-height": "1.12",
+                      "letter-spacing": "-0.02em",
+                      "text-wrap": "balance",
+                      "color": "var(--on-primary)"
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--on-primary)",
+                      "max-width": "58ch"
+                    },
+                    "if": "text"
+                  }
+                ]
+              },
+              {
+                "type": "action",
+                "element": "button",
+                "name": "Bouton principal",
+                "content": "{{cta}}",
+                "styles": {
+                  "background-color": "var(--on-primary)",
+                  "color": "var(--primary)",
+                  "padding": "14px 26px",
+                  "border": "none",
+                  "border-radius": "var(--radius-main)",
+                  "font-family": "var(--font-family)",
+                  "font-size": "var(--font-size-base)",
+                  "font-weight": "600",
+                  "white-space": "nowrap",
+                  "display": "inline-block",
+                  "align-self": "center"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "expressif"
+      ]
+    },
+    {
+      "id": "cta-cover",
+      "label": "Appel à l'action photo",
+      "description": "Appel à l'action final sur une grande photo assombrie, titre centré très grand et un bouton. Pour finir sur une émotion (réserver, venir, essayer).",
+      "slots": {
+        "title": "titre court",
+        "text?": "1 phrase",
+        "cta": "bouton",
+        "imageQuery": "mots-clés anglais d'une photo d'ambiance"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "128px 6%",
+          "background-color": "color-mix(in srgb, var(--primary) 35%, black)",
+          "color": "white",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "background-image": "linear-gradient(to bottom, color-mix(in srgb, black 62%, transparent), color-mix(in srgb, black 62%, transparent))",
+          "background-size": "cover",
+          "background-position": "center",
+          "container-type": "inline-size",
+          "min-height": "520px",
+          "justify-content": "center"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Contenu",
+            "styles": {
+              "width": "100%",
+              "max-width": "900px",
+              "display": "flex",
+              "flex-direction": "column",
+              "align-items": "center",
+              "text-align": "center",
+              "gap": "24px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h2",
+                "name": "Titre",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "clamp(calc(var(--font-size-base) * 2.2), 6.5cqi, calc(var(--font-size-base) * 4.5))",
+                  "font-weight": "700",
+                  "line-height": "1.02",
+                  "letter-spacing": "-0.03em",
+                  "text-wrap": "balance",
+                  "max-width": "16ch",
+                  "color": "white"
+                }
+              },
+              {
+                "type": "text",
+                "element": "p",
+                "name": "Introduction",
+                "content": "{{text}}",
+                "styles": {
+                  "font-size": "calc(var(--font-size-base) * 1.2)",
+                  "line-height": "1.6",
+                  "color": "color-mix(in srgb, white 82%, transparent)",
+                  "max-width": "44ch"
+                },
+                "if": "text"
+              },
+              {
+                "type": "action",
+                "element": "button",
+                "name": "Bouton principal",
+                "content": "{{cta}}",
+                "styles": {
+                  "background-color": "var(--primary)",
+                  "color": "var(--on-primary)",
+                  "padding": "14px 26px",
+                  "border": "none",
+                  "border-radius": "var(--radius-main)",
+                  "font-family": "var(--font-family)",
+                  "font-size": "var(--font-size-base)",
+                  "font-weight": "600",
+                  "white-space": "nowrap",
+                  "display": "inline-block",
+                  "align-self": "center",
+                  "margin-top": "8px"
+                }
+              }
+            ]
+          }
+        ],
+        "config": {
+          "backgroundQuery": "{{imageQuery}}"
+        }
+      },
+      "tone": false,
+      "families": [
+        "chaleureux",
+        "editorial"
+      ]
+    },
+    {
+      "id": "cta-statement",
+      "label": "Appel à l'action manifeste",
+      "description": "Appel à l'action manifeste : un très grand titre sous un filet, le texte et le bouton à droite, sans encadré. Net et confiant.",
+      "slots": {
+        "title": "titre court et affirmé",
+        "text?": "1 phrase",
+        "cta": "bouton",
+        "secondaryCta?": "lien secondaire"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "96px 6% 112px",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "container-type": "inline-size"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Composition",
+            "styles": {
+              "display": "grid",
+              "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              "gap": "32px 64px",
+              "align-items": "end",
+              "width": "100%",
+              "max-width": "1120px",
+              "border-top": "1px solid var(--text)",
+              "padding-top": "48px"
+            },
+            "children": [
+              {
+                "type": "text",
+                "element": "h2",
+                "name": "Titre",
+                "content": "{{title}}",
+                "styles": {
+                  "font-family": "var(--font-family-heading)",
+                  "font-size": "clamp(calc(var(--font-size-base) * 2.2), 7cqi, calc(var(--font-size-base) * 4.5))",
+                  "font-weight": "700",
+                  "line-height": "1",
+                  "letter-spacing": "-0.035em",
+                  "text-wrap": "balance",
+                  "max-width": "14ch"
+                }
+              },
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Action",
+                "styles": {
+                  "display": "flex",
+                  "flex-direction": "column",
+                  "gap": "20px"
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "element": "p",
+                    "name": "Introduction",
+                    "content": "{{text}}",
+                    "styles": {
+                      "font-size": "calc(var(--font-size-base) * 1.2)",
+                      "line-height": "1.6",
+                      "color": "var(--text)",
+                      "max-width": "58ch"
+                    },
+                    "if": "text"
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Actions",
+                    "styles": {
+                      "display": "flex",
+                      "flex-wrap": "wrap",
+                      "align-items": "center",
+                      "gap": "12px 24px",
+                      "padding-top": "8px"
+                    },
+                    "children": [
+                      {
+                        "type": "action",
+                        "element": "button",
+                        "name": "Bouton principal",
+                        "content": "{{cta}}",
+                        "styles": {
+                          "background-color": "var(--primary)",
+                          "color": "var(--on-primary)",
+                          "padding": "14px 26px",
+                          "border": "none",
+                          "border-radius": "var(--radius-main)",
+                          "font-family": "var(--font-family)",
+                          "font-size": "var(--font-size-base)",
+                          "font-weight": "600",
+                          "white-space": "nowrap",
+                          "display": "inline-block",
+                          "align-self": "flex-start"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien secondaire",
+                        "content": "{{secondaryCta}}",
+                        "styles": {
+                          "color": "var(--text)",
+                          "font-weight": "600",
+                          "text-decoration": "underline",
+                          "text-underline-offset": "6px",
+                          "white-space": "nowrap",
+                          "padding": "14px 4px"
+                        },
+                        "config": {
+                          "href": ""
+                        },
+                        "if": "secondaryCta"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true,
+      "families": [
+        "audacieux",
+        "editorial"
+      ]
+    },
+    {
+      "id": "footer",
+      "label": "Pied de page",
+      "description": "Pied de page : marque, phrase, liens, coordonnées et mentions. Toujours en dernier sur une page complète.",
+      "slots": {
+        "brand": "nom de la marque",
+        "tagline?": "phrase courte",
+        "links?": [
+          "lien"
+        ],
+        "details?": [
+          "ligne de coordonnées"
+        ],
+        "legal": "mention de bas de page, ex : © 2026 Nom"
+      },
+      "widget": {
+        "type": "container",
+        "element": "section",
+        "name": "{{_name}}",
+        "styles": {
+          "width": "100%",
+          "padding": "64px 6% 40px",
+          "background-color": "{{_bg}}",
+          "color": "var(--text)",
+          "font-family": "var(--font-family)",
+          "display": "flex",
+          "flex-direction": "column",
+          "align-items": "center",
+          "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)"
+        },
+        "children": [
+          {
+            "type": "container",
+            "element": "div",
+            "name": "Contenu du pied de page",
+            "styles": {
+              "width": "100%",
+              "max-width": "1120px",
+              "display": "flex",
+              "flex-direction": "column",
+              "gap": "40px"
+            },
+            "children": [
+              {
+                "type": "container",
+                "element": "div",
+                "name": "Colonnes",
+                "styles": {
+                  "display": "grid",
+                  "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
+                  "gap": "32px",
+                  "align-items": "start"
+                },
+                "children": [
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Marque",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "10px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Marque",
+                        "content": "{{brand}}",
+                        "styles": {
+                          "font-family": "var(--font-family-heading)",
+                          "font-size": "calc(var(--font-size-base) * 1.3)",
+                          "font-weight": "700"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "element": "p",
+                        "name": "Phrase",
+                        "content": "{{tagline}}",
+                        "styles": {
+                          "font-size": "var(--font-size-base)",
+                          "line-height": "1.65",
+                          "color": "var(--text-muted)",
+                          "max-width": "65ch"
+                        },
+                        "if": "tagline"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Liens",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "10px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "a",
+                        "name": "Lien",
+                        "content": "{{value}}",
+                        "styles": {
+                          "color": "var(--text-muted)"
+                        },
+                        "config": {
+                          "href": ""
+                        }
+                      }
+                    ],
+                    "repeat": "links"
+                  },
+                  {
+                    "type": "container",
+                    "element": "div",
+                    "name": "Coordonnées",
+                    "styles": {
+                      "display": "flex",
+                      "flex-direction": "column",
+                      "gap": "10px"
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "element": "span",
+                        "name": "Coordonnée",
+                        "content": "{{value}}",
+                        "styles": {
+                          "color": "var(--text-muted)",
+                          "line-height": "1.5"
+                        }
+                      }
+                    ],
+                    "repeat": "details"
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "element": "span",
+                "name": "Mentions",
+                "content": "{{legal}}",
+                "styles": {
+                  "font-size": "calc(var(--font-size-base) * 0.875)",
+                  "line-height": "1.5",
+                  "color": "var(--text-muted)",
+                  "border-top": "1px solid color-mix(in srgb, var(--text) 14%, transparent)",
+                  "padding-top": "24px"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "tone": true
+    }
+  ]
+}

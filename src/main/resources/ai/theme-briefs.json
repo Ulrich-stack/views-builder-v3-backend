@@ -1,44 +1,70 @@
 {
   "_source": "Adapté des fiches de styles de ui-ux-pro-max-skill (MIT, © 2024 Next Level Builder) : uniquement ce qui se traduit en styles inline et en variables du thème.",
+  "_families": {
+    "editorial": {
+      "label": "Éditorial calme",
+      "brief": "Un magazine posé, façon Aesop ou Kinfolk : grandes photos, titres en serif, beaucoup d'air, peu d'éléments par section. Le texte est soigné et précis, les photos montrent la matière et le geste."
+    },
+    "audacieux": {
+      "label": "Minimal audacieux",
+      "brief": "Peu d'éléments mais très affirmés, façon Apple ou Linear : titres géants, filets nets, contrastes forts, une seule action par section. Les phrases sont courtes et sûres d'elles."
+    },
+    "expressif": {
+      "label": "Expressif",
+      "brief": "Compositions vivantes, façon sites primés : photos de tailles différentes qui se chevauchent, blocs de la couleur du thème, rythme qui change d'une section à l'autre. Le ton est enjoué sans être familier."
+    },
+    "chaleureux": {
+      "label": "Chaleureux artisanal",
+      "brief": "Accueillant et rassurant : photos d'ambiance plein cadre, pictogrammes fins à côté des arguments, détails pratiques bien visibles (horaires, adresse). Le ton est proche et concret."
+    }
+  },
   "Minuit": {
     "style": "Dark Mode (OLED)",
     "brief": "Interface sombre et calme, faite pour la lecture en faible lumière. Contraste du texte élevé, la couleur principale sert d'accent ponctuel (boutons, mots-clés), jamais en grands aplats. Pas de lueurs ni d'ombres colorées : la profondeur vient du passage de var(--bg-page) à var(--surface).",
-    "avoid": "Fonds clairs, glow néon, ombres portées marquées."
+    "avoid": "Fonds clairs, glow néon, ombres portées marquées.",
+    "family": "audacieux"
   },
   "Minimal": {
     "style": "Minimalism & Swiss Style",
     "brief": "Clarté fonctionnelle : grilles nettes, beaucoup d'espace blanc, hiérarchie portée uniquement par la taille et la graisse du texte. Seulement les éléments essentiels. Alignements stricts, colonnes de largeurs différentes plutôt que symétrie parfaite.",
-    "avoid": "Ombres, dégradés, décorations, couleurs vives en aplat."
+    "avoid": "Ombres, dégradés, décorations, couleurs vives en aplat.",
+    "family": "audacieux"
   },
   "Élégant": {
     "style": "Editorial Grid / Magazine",
     "brief": "Mise en page de magazine : grille asymétrique, grands titres en serif (var(--font-family-heading)), citations mises en avant, images larges, colonnes de texte au rythme posé. L'élégance vient de l'espace et de la typographie, pas des effets.",
-    "avoid": "Cartes empilées, boutons arrondis en pilule, couleurs saturées."
+    "avoid": "Cartes empilées, boutons arrondis en pilule, couleurs saturées.",
+    "family": "editorial"
   },
   "Fun": {
     "style": "Vibrant & Block-based",
     "brief": "Énergique et joueur : grands blocs de couleur (var(--primary), var(--secondary), var(--surface)) bien séparés (gaps de 48px et plus), typographie très grande, formes géométriques franches via les arrondis. L'audace passe par la composition, pas par l'accumulation d'effets.",
-    "avoid": "Ton corporate, petites tailles de texte, mise en page dense."
+    "avoid": "Ton corporate, petites tailles de texte, mise en page dense.",
+    "family": "expressif"
   },
   "Nature": {
     "style": "Organic Biophilic",
     "brief": "Doux et organique : coins très arrondis et variés (16 à 32px), rythme aéré et apaisant, images de nature larges, sections qui respirent. Les tons terre et vert du thème dominent, la couleur principale reste rare.",
-    "avoid": "Angles vifs, contrastes agressifs, esthétique tech."
+    "avoid": "Angles vifs, contrastes agressifs, esthétique tech.",
+    "family": "chaleureux"
   },
   "Océan": {
     "style": "Soft UI Evolution",
     "brief": "Frais et profond : surfaces légèrement en relief avec des ombres douces et réalistes (décalage vertical, flou large), arrondis moyens, transitions fluides. La couleur principale ponctue les actions, la couleur d'accent chaude crée le contraste.",
-    "avoid": "Ombres dures, neumorphisme peu contrasté, textes gris sur fond coloré."
+    "avoid": "Ombres dures, neumorphisme peu contrasté, textes gris sur fond coloré.",
+    "family": "chaleureux"
   },
   "Néon": {
     "style": "Cyberpunk UI (version sobre)",
     "brief": "Tech et tranchant : fond sombre, angles vifs (arrondis à 0), accents néon de var(--primary) et var(--secondary) utilisés avec parcimonie, typographie technique en grand. Lignes fines et grilles visibles plutôt qu'effets.",
-    "avoid": "Effets glitch, glow partout, police monospace pour du texte courant."
+    "avoid": "Effets glitch, glow partout, police monospace pour du texte courant.",
+    "family": "audacieux"
   },
   "Pro": {
     "style": "Flat Design",
     "brief": "Sérieux et rassurant : aplats nets sans dégradés, arrondis discrets, hiérarchie très lisible, preuves concrètes (chiffres réels, témoignages) bien intégrées au texte. La couleur principale guide vers une seule action par section.",
-    "avoid": "Ombres et dégradés décoratifs, ton familier, plusieurs boutons concurrents."
+    "avoid": "Ombres et dégradés décoratifs, ton familier, plusieurs boutons concurrents.",
+    "family": "editorial"
   },
   "_default": {
     "style": "Thème personnalisé",
